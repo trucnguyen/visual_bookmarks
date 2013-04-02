@@ -1,0 +1,73 @@
+#folders
+{
+	background-color : white;
+	margin: 5px; 
+	border: 1px dotted black;
+}
+
+.folderList
+{
+	font-family: "Helvetica Neue";
+	font-size: 15px;
+	margin: 5px;
+	cursor:default;
+}
+
+.folderList:hover
+{
+	background-color: lightblue;
+}
+
+#sidebarCC
+{
+	background-color:lightgreen;
+	border:1px dotted gray;
+	float:right;
+	color:blue;
+	z-index:9000;
+  	/*padding: 0 40px 0 40px;*/
+  	position:fixed;
+  	right:10px;
+  	top:150px;
+  	width:160px;
+  	/*position: absolute;
+  	left: 1300px;
+	top: 10px;*/ height:254px; 
+}
+
+#sidebarCC h1
+{
+	font-weight:bold;
+	color:darkblue;
+	text-align:center;
+	background:none;
+	text-indent:0;
+	font-size:14px;
+	height:20px;
+	overflow:visible;
+}
+
+#sidebarCC li
+{
+	line-height:1.2;
+	margin: 3px 0;
+	color:purple;
+}
+
+
+.sidebarFList /*sidebar folderList*/
+{
+	cursor:default;
+}
+
+.sidebarFList:hover /*sidebar folderList*/
+{
+	background-color: lightpink;
+}
+
+#plusIcon
+{
+	width:50%;
+	display:block;
+	font-size:1%;
+}

@@ -1,0 +1,38 @@
+{
+  "name": "Visual Bookmarks",
+  "version": "0.0",
+  "manifest_version": 2,
+  "description": "Save and Recall Websites with ease",
+  "background": {
+    "scripts": ["storage.js"]
+  },
+  "browser_action": {
+    "default_icon": "icon.gif"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": [
+        "js/jquery-1.8.3.js",
+        "functions.js",
+        "start.js"
+      ],
+      "css": [
+        "css/style.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "chrome://favicon/",
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+  	"history"
+  ],
+  "content_security_policy": "default-src 'self'; img-src *;style-src 'self' 'unsafe-inline'; connect-src *",
+  "web_accessible_resources": [
+    "images/*"
+  ]
+}
