@@ -6,10 +6,10 @@ right: 0px;
 }
 #bookmark-list{
 	display: none;
-	width: 200px;
-	height: 200px;
-	background-color: red;
+	background-color: white;
 	float: right;
+	margin: 0px;
+	list-style-type: none;
 }
 #add-bookmark{
 	float: right;

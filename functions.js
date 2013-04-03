@@ -36,11 +36,29 @@ function createBookmark(){
 	  };
 }
 
+function notAlreadySaved(){
+	getGlobalStorage("bookmarks", function(bookmarks){
+		var bookmarks = bookmarks;
+		bookmarks[document.URL] = newBookmark;
+		saveGlobalStorage("bookmarks", bookmarks);
+	});
+	for(var url in bookmarks){
+		if(document.URL==url){
+			console.log("duplicate detected");
+			return false;
+		}
+	}
+	return true;
+}
+
 function saveBookmark(){
-var newBookmark = createBookmark();
-getGlobalStorage("bookmarks", function(bookmarks){
-bookmarks[document.URL] = newBookmark;
-});
+	if(notAlreadySaved){
+		var newBookmark = createBookmark();
+		getGlobalStorage("bookmarks", function(bookmarks){
+			bookmarks[document.URL] = newBookmark;
+			saveGlobalStorage("bookmarks", bookmarks);
+		});
+	}
 }
 
 function deleteBookmark(url){
