@@ -5,3 +5,11 @@ getGlobalStorage("bookmarks", function(bookmarks){
   }
   console.log(bookmarks);
 });
+console.log("Begin stuff");
+bookmarkView();
+
+$(document).live(function(){
+  $('#expand-bookmarks').onclick(function(){
+    console.log("expand");
+  })
+});
