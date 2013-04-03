@@ -8,8 +8,8 @@ getGlobalStorage("bookmarks", function(bookmarks){
 console.log("Begin stuff");
 bookmarkView();
 
-$(document).live(function(){
-  $('#expand-bookmarks').onclick(function(){
-    console.log("expand");
+$(document).ready(function(){
+  $('#expand-bookmarks').click(function(){
+    $('#bookmark-list').toggle();
   })
 });

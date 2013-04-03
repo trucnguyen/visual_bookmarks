@@ -25,15 +25,15 @@ function getGlobalStorage(key, callback){
 }
 
 function clearBookmarks(){
-saveGlobalStorage("bookmarks", {});
+	saveGlobalStorage("bookmarks", {});
 }
 
 function createBookmark(){
-return {
-"url": document.URL,
-"title": document.title,
-    "time": Date.now()
-  };
+	return {
+		"url": document.URL,
+		"title": document.title,
+	    "time": Date.now()
+	  };
 }
 
 function saveBookmark(){
@@ -44,29 +44,29 @@ bookmarks[document.URL] = newBookmark;
 }
 
 function deleteBookmark(url){
-var remainingBookmarks = {};
-getGlobalStorage("bookmarks", function(bookmarks){
-for(var bookmark in bookmarks){
-if(bookmarks[bookmark]!=url){
-remainingBookmarks[bookmark] = bookmarks[bookmark];
-}
-}
-saveGlobalStorage("bookmarks", remainingBookmarks);
-});
+	var remainingBookmarks = {};
+	getGlobalStorage("bookmarks", function(bookmarks){
+		for(var bookmark in bookmarks){
+			if(bookmarks[bookmark]!=url){
+				remainingBookmarks[bookmark] = bookmarks[bookmark];
+			}
+		}
+		saveGlobalStorage("bookmarks", remainingBookmarks);
+	});
 }
 
 function bookmarkView(){
-$('body').append('<div id="bookmark-view"></div>');
-$('#bookmark-view').append('<img id="add-bookmark" src="'+chrome.extension.getURL("images/plus.png")+'"/>');
-$('#bookmark-view').append('<div id="expand-bookmarks"> << </div>');
-$('#bookmark-view').append('<ul id="bookmark-list"></ul>');
+	$('body').append('<div id="bookmark-view"></div>');
+	$('#bookmark-view').append('<img id="add-bookmark" src="'+chrome.extension.getURL("images/plus.png")+'"/><br/>');
+	$('#bookmark-view').append('<div id="expand-bookmarks"> << </div><br/>');
+	$('#bookmark-view').append('<ul id="bookmark-list"></ul>');
 }
 
 function grabBookmarks(){
-$('#bookmark-list').empty()
-getGlobalStorage("bookmarks", function(bookmarks){
-for(var bookmark in bookmarks){
-$('#bookmark-list').append('<div class="visual-bookmark">'+bookmark+'</div>')
-}
-});
+	$('#bookmark-list').empty()
+	getGlobalStorage("bookmarks", function(bookmarks){
+		for(var bookmark in bookmarks){
+			$('#bookmark-list').append('<div class="visual-bookmark">'+bookmark+'</div>')
+		}
+	});
 }

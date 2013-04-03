@@ -9,4 +9,12 @@ right: 0px;
 	width: 200px;
 	height: 200px;
 	background-color: red;
+	float: right;
+}
+#add-bookmark{
+	float: right;
+}
+#expand-bookmarks{
+	float: right;
+	width: 48px;
 }
