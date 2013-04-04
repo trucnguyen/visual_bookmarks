@@ -22,5 +22,7 @@ $(document).ready(function(){
   });
   $('.delete-bookmark').click(function(e){
     console.log("Win");
+    console.log(jQuery(this).attr('url'));
+    deleteBookmark(jQuery(this).attr('url'));
   });
 });

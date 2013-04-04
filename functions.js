@@ -66,10 +66,11 @@ function saveBookmark(){
 }
 
 function deleteBookmark(url){
+	console.log("delete bookmark:"+url);
 	var remainingBookmarks = {};
 	getGlobalStorage("bookmarks", function(bookmarks){
 		for(var bookmark in bookmarks){
-			if(bookmarks[bookmark]!=url){
+			if(bookmark!=url){
 				remainingBookmarks[bookmark] = bookmarks[bookmark];
 			}
 		}
