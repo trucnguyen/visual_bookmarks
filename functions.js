@@ -26,6 +26,7 @@ function getGlobalStorage(key, callback){
 
 function clearBookmarks(){
 	saveGlobalStorage("bookmarks", {});
+	grabBookmarks();
 }
 
 function createBookmark(){
@@ -58,6 +59,9 @@ function saveBookmark(){
 			bookmarks[document.URL] = newBookmark;
 			saveGlobalStorage("bookmarks", bookmarks);
 		});
+		setTimeout(function(){
+			grabBookmarks();	
+		}, 200);
 	}
 }
 
@@ -71,20 +75,23 @@ function deleteBookmark(url){
 		}
 		saveGlobalStorage("bookmarks", remainingBookmarks);
 	});
+	grabBookmarks();
 }
 
 function bookmarkView(){
-	$('body').append('<div id="bookmark-view"></div>');
-	$('#bookmark-view').append('<img id="add-bookmark" src="'+chrome.extension.getURL("images/plus.png")+'"/><br/>');
-	$('#bookmark-view').append('<div id="expand-bookmarks"> << </div><br/>');
+	$('body').append('<div id="bookmark-view"><div id="bookmark-options"></div></div>');
+	$('#bookmark-options').append('<div id="expand-bookmarks"> << </div>');
+	$('#bookmark-options').append('<img id="add-bookmark" src="'+chrome.extension.getURL("images/plus.png")+'"/><br/>');
+	$('#bookmark-options').append('<a id="clear-bookmarks">Clear All</a>');
 	$('#bookmark-view').append('<ul id="bookmark-list"></ul>');
 }
 
 function grabBookmarks(){
-	$('#bookmark-list').empty()
 	getGlobalStorage("bookmarks", function(bookmarks){
+		$('#bookmark-list').empty()
 		for(var bookmark in bookmarks){
-			$('#bookmark-list').append('<div class="visual-bookmark">'+bookmark+'</div>')
+			$('#bookmark-list').append('<li class="bookmark-element"><a href="'+bookmark+'"><div class="visual-bookmark">'+bookmark+'</div></a><div class="delete-bookmark" url="'+bookmark+'">delete</div></li>');
+
 		}
 	});
 }
