@@ -33,7 +33,10 @@ function createBookmark(){
 	return {
 		"url": document.URL,
 		"title": document.title,
-	    "time": Date.now()
+	    "time": Date.now(),
+	    "image": "",
+	    "description": "",
+	    "tags": []
 	  };
 }
 
