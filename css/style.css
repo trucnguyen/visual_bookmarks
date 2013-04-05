@@ -1,9 +1,9 @@
-
 #bookmark-view{
 	position: fixed;
 	top: 0px;
 	right: 0px;
 	height: 100%;
+	z-index: 2147483647;
 }
 #bookmark-list{
 	display: none;
@@ -19,6 +19,10 @@
 
 }
 #bookmark-list li{
+	font-family: "HelveticaNeueThin", "HelveticaNeue-Thin", "Arial", sans-serif; 
+	font-size: 16px;
+	font-weight:200;
+	font-stretch:normal;
 	height: 208px;
 	width: 100%;
 	border-bottom: 1px solid #888;
@@ -38,13 +42,16 @@
 #clear-bookmarks{
 	display: none;
 }
-.visual-bookmark{
-	height: 170px;
-	background-color: #ccc;
-}
 #bookmark-options{
 	width: 100%;
 	height: 48px;
 	background-color: #e3e3e8;
 
+}
+.visual-bookmark{
+	height: 170px;
+	background-color: #ccc;
+}
+.delete-bookmark{
+	text-align: center;
 }

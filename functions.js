@@ -92,10 +92,9 @@ function bookmarkView(){
 
 function grabBookmarks(){
 	getGlobalStorage("bookmarks", function(bookmarks){
-		$('#bookmark-list').empty()
-		for(var bookmark in bookmarks){
-			$('#bookmark-list').append('<li class="bookmark-element"><a href="'+bookmark+'"><div class="visual-bookmark">'+bookmark+'</div></a><div class="delete-bookmark" url="'+bookmark+'">delete</div></li>');
-
+		$('#bookmark-list').empty();
+		for(var key in bookmarks){
+			$('#bookmark-list').append('<li class="bookmark-element"><a href="'+bookmarks[key]['url']+'"><div class="visual-bookmark">'+bookmarks[key]['title']+'</div></a><div class="delete-bookmark" url="'+bookmarks[key]['url']+'">delete</div></li>');
 		}
 	});
 }
