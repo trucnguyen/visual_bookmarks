@@ -30,11 +30,13 @@ function clearBookmarks(){
 }
 
 function createBookmark(){
+	//google favicon: "value", https://plus.google.com/_/favicon?domain=
 	return {
 		"url": document.URL,
+	    "domain": document.domain,		
 		"title": document.title,
 	    "time": Date.now(),
-	    "image": "",
+	    "image": getBiggestImage(),
 	    "description": "",
 	    "tags": []
 	  };
@@ -79,7 +81,9 @@ function deleteBookmark(url){
 		}
 		saveGlobalStorage("bookmarks", remainingBookmarks);
 	});
-	grabBookmarks();
+	setTimeout(function(){
+			grabBookmarks();	
+		}, 200);
 }
 
 function bookmarkView(){
@@ -94,7 +98,7 @@ function grabBookmarks(){
 	getGlobalStorage("bookmarks", function(bookmarks){
 		$('#bookmark-list').empty();
 		for(var key in bookmarks){
-			$('#bookmark-list').append('<li class="bookmark-element"><a href="'+bookmarks[key]['url']+'"><div class="visual-bookmark">'+bookmarks[key]['title']+'</div></a><div class="delete-bookmark" url="'+bookmarks[key]['url']+'">delete</div></li>');
+			$('#bookmark-list').append('<li class="bookmark-element"><a href="'+bookmarks[key]['image']+'"><div class="visual-bookmark">'+bookmarks[key]['title']+'</div></a><a class="delete-bookmark" url="'+bookmarks[key]['url']+'">delete</a></li>');
 		}
 	});
 }

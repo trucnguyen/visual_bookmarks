@@ -54,4 +54,5 @@
 }
 .delete-bookmark{
 	text-align: center;
+	cursor: pointer;
 }
