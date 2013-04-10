@@ -1,23 +1,37 @@
+function videoExtract(){
+	var url = document.URL;
+	var iframe = jQuery('iframe');
+	var youtube = 'http://www.youtube.com/watch?v=';
+	var embed = 'http://www.youtube.com/embed/';
+	var iframeSrc = '';
+	if(url.indexOf(youtube)!=-1){
+		console.log("This is a youtube video");
+		docType = "video";
+		iframeSrc = embed+url.substring(youtube.length);
+	}
+	/* Add method for checking if youtube is embedded
+	else{
+		for(var elem in iframe){
+			var iframeSrc = iframe[elem].src
+			if(iframeSrc!=undefined && iframeSrc.indexOf(embed)!=-1){
+				console.log('This is an embedded youtube video');
+				docType = "video";
+				iframeSrc = iframe[elem].src+'';
+				console.log(iframeSrc)
+			}
+		}
+	}*/
+	return iframeSrc;
+}
 function pageType(){
 	var url = document.URL;
-	var domain = document.domain;
 	var iframe = jQuery('iframe');
 	var imageTypes = [".png", ".jpg"]
 	var docType = "html";
-	if(url.indexOf('http://www.youtube.com/watch?')!=-1){
-		console.log("This is a youtube video");
-		docType = "video";
-	}
-	else if(url.indexOf('.png')!=-1){ docType = "image";}
+	if(url.indexOf('.png')!=-1){ docType = "image";}
 	else if(url.indexOf('.jpg')!=-1){ docType = "image";}
 	else if(url.indexOf('.gif')!=-1){ docType = "gif";}
-	for(var elem in iframe){
-		var iframeSrc = iframe[elem].src
-		if(iframeSrc!=undefined && iframeSrc.indexOf("http://www.youtube.com/embed/9tCYRTMb5HI")!=-1){
-			console.log('This is an embedded youtube video');
-			docType = "video";
-		}
-	}
+	else if(videoExtract()){ docType = "video"; }
 	return docType;
 }
 function validImage(imageSrc){
