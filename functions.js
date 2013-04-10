@@ -38,6 +38,7 @@ function createBookmark(){
 	    "time": Date.now(),
 	    "image": getBiggestImage(),
 	    "description": "",
+	    "pageType": pageType(),
 	    "tags": []
 	  };
 }
@@ -100,5 +101,6 @@ function grabBookmarks(){
 		for(var key in bookmarks){
 			$('#bookmark-list').append('<li class="bookmark-element"><a href="'+bookmarks[key]['url']+'"><div class="visual-bookmark"><img class="bookmark-image" src="'+bookmarks[key]['image']+'#ignore"/></div></a><div class="bookmark-title">'+bookmarks[key]['title']+'</div><a class="delete-bookmark" url="'+bookmarks[key]['url']+'">delete</a></li>');
 		}
+		$()
 	});
 }
