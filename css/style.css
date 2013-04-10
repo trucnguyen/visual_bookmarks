@@ -55,4 +55,17 @@
 .delete-bookmark{
 	text-align: center;
 	cursor: pointer;
+	float: right;
+}
+.bookmark-image{
+	max-height: 170px;
+	max-width: 300px;
+}
+.bookmark-title{
+	display: inline;
+	font-size: 12pt;
+	overflow: none;
+	float: left;
+	width: 250px;
+	height: 40px;
 }
