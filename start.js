@@ -15,7 +15,6 @@ $(document).ready(function(){
   });
   $('#add-bookmark').click(function(){
     saveBookmark();
-    $('#bookmark-list').show();
   });
   $('#clear-bookmarks').click(function(){
     clearBookmarks();
