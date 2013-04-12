@@ -1,9 +1,4 @@
-$("head").append('<script type="text/javascript" src="'+chrome.extension.getURL("jquery-1.8.3.js")+'"></script>');
-$("head").append('<script type="text/javascript" src="'+chrome.extension.getURL("jquery-ui.min.js")+'"></script>');
-$("head").append('<script type="text/javascript" src="'+chrome.extension.getURL("tag-it.js")+'"></script>');
-$("head").append('<link rel="stylesheet" type="text/css" href="'+chrome.extension.getURL("../css/jquery-ui.css")+'" />');
-$("head").append('<link rel="stylesheet" type="text/css" href="'+chrome.extension.getURL("../css/jquery.tagit.css")+'" />');
-
+// Init tags
 $(function(){
     var sampleTags = ['c++', 'java', 'php', 'coldfusion', 'javascript', 'asp', 'ruby', 'python', 'c'];
 
@@ -15,41 +10,6 @@ $(function(){
         // This will make Tag-it submit a single form value, as a comma-delimited field.
         singleField: true,
         singleFieldNode: $('#tagsField')
-    });
-
-    //-------------------------------
-    // Tag events
-    //-------------------------------
-    var tagsField = $('#tagsField');
-
-    var addEvent = function(text) {
-        $('#events_container').append(text + '<br>');
-    };
-
-    tagsField.tagit({
-        availableTags: sampleTags,
-        beforeTagAdded: function(evt, ui) {
-            if (!ui.duringInitialization) {
-                addEvent('beforeTagAdded: ' + tagsField.tagit('tagLabel', ui.tag));
-            }
-        },
-        afterTagAdded: function(evt, ui) {
-            if (!ui.duringInitialization) {
-                addEvent('afterTagAdded: ' + tagsField.tagit('tagLabel', ui.tag));
-            }
-        },
-        beforeTagRemoved: function(evt, ui) {
-            addEvent('beforeTagRemoved: ' + tagsField.tagit('tagLabel', ui.tag));
-        },
-        afterTagRemoved: function(evt, ui) {
-            addEvent('afterTagRemoved: ' + tagsField.tagit('tagLabel', ui.tag));
-        },
-        onTagClicked: function(evt, ui) {
-            addEvent('onTagClicked: ' + tagsField.tagit('tagLabel', ui.tag));
-        },
-        onTagExists: function(evt, ui) {
-            addEvent('onTagExists: ' + tagsField.tagit('tagLabel', ui.existingTag));
-        }
     });
     
 });
@@ -169,6 +129,8 @@ function grabBookmarks(){
 	});
 }
 
+
+// Bind event handlers to tags and bookmark-elements
 $(function()
 {
     $('#tagsField').tagit({
