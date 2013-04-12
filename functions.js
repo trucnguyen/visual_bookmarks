@@ -1,3 +1,60 @@
+$("head").append('<script type="text/javascript" src="'+chrome.extension.getURL("jquery-1.8.3.js")+'"></script>');
+$("head").append('<script type="text/javascript" src="'+chrome.extension.getURL("jquery-ui.min.js")+'"></script>');
+$("head").append('<script type="text/javascript" src="'+chrome.extension.getURL("tag-it.js")+'"></script>');
+$("head").append('<link rel="stylesheet" type="text/css" href="'+chrome.extension.getURL("../css/jquery-ui.css")+'" />');
+$("head").append('<link rel="stylesheet" type="text/css" href="'+chrome.extension.getURL("../css/jquery.tagit.css")+'" />');
+
+$(function(){
+    var sampleTags = ['c++', 'java', 'php', 'coldfusion', 'javascript', 'asp', 'ruby', 'python', 'c'];
+
+    //-------------------------------
+    // Single field
+    //-------------------------------
+    $('#tagsField').tagit({
+        availableTags: sampleTags,
+        // This will make Tag-it submit a single form value, as a comma-delimited field.
+        singleField: true,
+        singleFieldNode: $('#tagsField')
+    });
+
+    //-------------------------------
+    // Tag events
+    //-------------------------------
+    var tagsField = $('#tagsField');
+
+    var addEvent = function(text) {
+        $('#events_container').append(text + '<br>');
+    };
+
+    tagsField.tagit({
+        availableTags: sampleTags,
+        beforeTagAdded: function(evt, ui) {
+            if (!ui.duringInitialization) {
+                addEvent('beforeTagAdded: ' + tagsField.tagit('tagLabel', ui.tag));
+            }
+        },
+        afterTagAdded: function(evt, ui) {
+            if (!ui.duringInitialization) {
+                addEvent('afterTagAdded: ' + tagsField.tagit('tagLabel', ui.tag));
+            }
+        },
+        beforeTagRemoved: function(evt, ui) {
+            addEvent('beforeTagRemoved: ' + tagsField.tagit('tagLabel', ui.tag));
+        },
+        afterTagRemoved: function(evt, ui) {
+            addEvent('afterTagRemoved: ' + tagsField.tagit('tagLabel', ui.tag));
+        },
+        onTagClicked: function(evt, ui) {
+            addEvent('onTagClicked: ' + tagsField.tagit('tagLabel', ui.tag));
+        },
+        onTagExists: function(evt, ui) {
+            addEvent('onTagExists: ' + tagsField.tagit('tagLabel', ui.existingTag));
+        }
+    });
+    
+});
+
+
 // Save (key, value) to chrome's local storage
 function saveGlobalStorage(key, value){
   chrome.extension.sendMessage({cmd: "saveStorage", key: key, value: value});
@@ -93,6 +150,7 @@ function bookmarkView(){
 	$('#bookmark-options').append('<div id="expand-bookmarks"> << </div>');
 	$('#bookmark-options').append('<img id="add-bookmark" src="'+chrome.extension.getURL("images/plus.png")+'"/><br/>');
 	$('#bookmark-options').append('<a id="clear-bookmarks">Clear All</a>');
+	$('#bookmark-options').append('<div id="tags-row"><form><ul id="tagsField" /></div>');
 	$('#bookmark-view').append('<ul id="bookmark-list"></ul>');
 }
 
@@ -110,3 +168,28 @@ function grabBookmarks(){
 		$('.bookmark-element').last().css('padding-bottom','40px');
 	});
 }
+
+$(function()
+{
+    $('#tagsField').tagit({
+	    beforeTagAdded: function(evt, ui) {
+	        if (!ui.duringInitialization) {
+	        	ui.tag.draggable({
+					zIndex: 1000,
+					ghosting: true,
+					revert:	true,
+					opacity: 0.7
+				});
+	        }
+	    }
+    });
+    
+    $('.bookmark-element').droppable({
+    	drop: function(evt, ui){
+    		$(this)
+    			.addClass( "ui-state-highlight" )
+    			.find(".bookmark-title")
+    			.prepend("TAG " + ui.draggable.find(".tagit-label").text());
+    	}
+	});
+});

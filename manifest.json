@@ -14,12 +14,16 @@
       "matches": ["http://*/*", "https://*/*"],
       "js": [
         "js/jquery-1.8.3.js",
+        "js/jquery-ui.js",
+        "js/tag-it.js",
         "extract.js",
         "functions.js",
         "start.js"
       ],
       "css": [
-        "css/style.css"
+        "css/style.css",
+        "css/jquery-ui.css",
+        "css/jquery.tagit.css"
       ],
       "run_at": "document_end",
       "all_frames": false
