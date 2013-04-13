@@ -110,7 +110,7 @@ function bookmarkView(){
 	$('#bookmark-options').append('<div id="expand-bookmarks"> << </div>');
 	$('#bookmark-options').append('<img id="add-bookmark" src="'+chrome.extension.getURL("images/plus.png")+'"/><br/>');
 	$('#bookmark-options').append('<a id="clear-bookmarks">Clear All</a>');
-	$('#bookmark-options').append('<div id="tags-row"><form><ul id="tagsField" /></div>');
+	$('#bookmark-view').append('<div id="tags-row"><form><ul id="tagsField" /></div>');
 	$('#bookmark-view').append('<ul id="bookmark-list"></ul>');
 }
 
