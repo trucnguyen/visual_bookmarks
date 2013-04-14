@@ -5,6 +5,21 @@ getGlobalStorage("bookmarks", function(bookmarks){
   }
   console.log(bookmarks);
 });
+getGlobalStorage("tags", function(tags){
+  if(tags == undefined || tags == null) {
+    saveGlobalStorage('tags', []);
+  }
+  else{
+    $('#tagsField').tagit({
+        // This will make Tag-it submit a single form value, as a comma-delimited field.
+        singleField: true,
+        singleFieldNode: $('#tagsField')
+    });
+    for(var t in tags){
+      $('#tagsField').tagit('createTag',tags[t]);
+    }
+  }
+});
 console.log("Begin stuff");
 bookmarkView();
 grabBookmarks();
@@ -23,5 +38,15 @@ $(document).ready(function(){
     console.log("Win");
     console.log(jQuery(this).attr('url'));
     deleteBookmark(jQuery(this).attr('url'));
+  });
+  $('#tagsField').change(function(e){
+    setTimeout(function(){
+      var tags = [];
+      for(var t=0; t<jQuery('#tagsField .tagit-choice .tagit-label').length; t++){
+        tags.push(jQuery(jQuery('#tagsField .tagit-choice .tagit-label')[t]).html());  
+      }
+      console.log(tags);
+      saveGlobalStorage('tags', tags);
+    }, 300); 
   });
 });

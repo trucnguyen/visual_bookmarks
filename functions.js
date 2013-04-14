@@ -1,18 +1,4 @@
 // Init tags
-$(function(){
-    var sampleTags = ['c++', 'java', 'php', 'coldfusion', 'javascript', 'asp', 'ruby', 'python', 'c'];
-
-    //-------------------------------
-    // Single field
-    //-------------------------------
-    $('#tagsField').tagit({
-        availableTags: sampleTags,
-        // This will make Tag-it submit a single form value, as a comma-delimited field.
-        singleField: true,
-        singleFieldNode: $('#tagsField')
-    });
-    
-});
 
 
 // Save (key, value) to chrome's local storage
