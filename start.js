@@ -41,6 +41,13 @@ $(document).ready(function(){
   $('#expand-bookmarks').click(function(){
     $('#bookmark-list').toggle();
     $('#clear-bookmarks').toggle();
+    console.log($('#bookmark-view').css('height'));
+    if($('#bookmark-view').hasClass("expanded-view")){
+      $('#bookmark-view').removeClass("expanded-view");
+    }
+    else{
+      $('#bookmark-view').addClass("expanded-view");
+    }
   });
   $('#add-bookmark').click(function(){
     saveBookmark();

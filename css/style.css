@@ -2,8 +2,11 @@
 	position: fixed;
 	top: 0px;
 	right: 0px;
-	height: 100%;
+	height: auto;
 	z-index: 2147483647;
+}
+#bookmark-view.expanded-view{
+	height: 100%;
 }
 #bookmark-list{
 	display: none;
