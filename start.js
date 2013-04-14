@@ -23,7 +23,11 @@ getGlobalStorage("tags", function(tags){
     }
   }); 
   if(tags == undefined || tags == null) {
-    saveGlobalStorage('tags', []);
+    var defaultTags = ["gif", "image", "video", "html"];
+    saveGlobalStorage('tags', defaultTags);
+    for(var t in defaultTags){
+      $('#tagsField').tagit('createTag', defaultTags[t]);
+    }
   }
   else{
     for(var t in tags){
@@ -60,10 +64,14 @@ $(document).ready(function(){
       saveGlobalStorage('tags', tags);
     }, 300); 
   });
-  $('.bookmark-element').change(function(e){
-    console.log("This is a mic test");
+  $('body').on('click', '.tagit-choice', function(e){
+    $('.bookmark-element').hide();
+    $('.selected-tag').removeClass('selected-tag');
+    $(this).addClass('selected-tag')
+    var selector = '.tag-'+$(this).children('.tagit-label').html();
+    $(selector).parent().parent().parent().parent().show();
   });
-  $('body').on('change', '.bookmark-tags', function(e){
-    console.log($(this).parent().parent().attr('href'));
+  $('#reset-tags').click(function(e){
+    $('.bookmark-element').show();
   });
 });

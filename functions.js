@@ -43,7 +43,7 @@ function createBookmark(){
 	    "description": "",
 	    "video": videoExtract(),
 	    "pageType": pageType(),
-	    "tags": []
+	    "tags": [pageType()]
 	  };
 }
 
@@ -96,6 +96,7 @@ function bookmarkView(){
 	$('#bookmark-options').append('<div id="expand-bookmarks"> << </div>');
 	$('#bookmark-options').append('<img id="add-bookmark" src="'+chrome.extension.getURL("images/plus.png")+'"/><br/>');
 	$('#bookmark-options').append('<a id="clear-bookmarks">Clear All</a>');
+	$('#bookmark-options').append('<a id="reset-tags">View All</a>')
 	$('#bookmark-view').append('<div id="tags-row"><form><ul id="tagsField" /></div>');
 	$('#bookmark-view').append('<ul id="bookmark-list"></ul>');
 }
@@ -112,12 +113,12 @@ function grabBookmarks(){
 		$('#bookmark-list').empty();
 		for(var key in bookmarks){
 			if(bookmarks[key]['pageType']=="video"){
-			$('#bookmark-list').prepend('<li class="bookmark-element"><a href="'+bookmarks[key]['url']+'"><div class="visual-bookmark"><iframe class="bookmark-video" width="300" height="170" src="'+bookmarks[key]['video']+'" frameborder="0" allowfullscreen></iframe></div></a><div class="bookmark-title">'+bookmarks[key]['title']+'</div><a class="delete-bookmark" url="'+bookmarks[key]['url']+'">delete</a></li>');
+			$('#bookmark-list').prepend('<li class="bookmark-element"><a class="bookmark-url" href="'+bookmarks[key]['url']+'"><div class="visual-bookmark"><ul class="bookmark-tags"></ul><iframe class="bookmark-video" width="300" height="170" src="'+bookmarks[key]['video']+'" frameborder="0" allowfullscreen></iframe></div></a><div class="bookmark-title">'+bookmarks[key]['title']+'</div><a class="delete-bookmark" url="'+bookmarks[key]['url']+'">delete</a></li>');
 			}
 			else{
 				$('#bookmark-list').prepend('<li class="bookmark-element"><a class="bookmark-url" href="'+bookmarks[key]['url']+'"><div class="visual-bookmark"><ul class="bookmark-tags"></ul><img class="bookmark-image" src="'+bookmarks[key]['image']+'#ignore"/></div></a><div class="bookmark-title">'+bookmarks[key]['title']+'</div><a class="delete-bookmark" url="'+bookmarks[key]['url']+'">delete</a></li>');
-				grabTags(bookmarks[key]['url'], bookmarks[key]['tags']);
 			}
+			grabTags(bookmarks[key]['url'], bookmarks[key]['tags']);
 		}
 		$('.bookmark-element').last().css('padding-bottom','40px');
 		$('.bookmark-element').droppable({
@@ -144,5 +145,4 @@ function addTag(url, tag){
 		//bookmarks[url]['']
 	});
 }
-
 // Bind event handlers to tags and bookmark-elements

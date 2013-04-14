@@ -79,3 +79,7 @@
 .bookmark-tags{
 	display: none;
 }
+.tagit-choice.ui-widget-content.ui-state-default.ui-corner-all.tagit-choice-editable.ui-draggable.selected-tag{
+	background-color: #C5B358 !important;
+	background-image: none;
+}
