@@ -34,10 +34,12 @@ $(document).ready(function(){
   $('#clear-bookmarks').click(function(){
     clearBookmarks();
   });
-  $('.delete-bookmark').click(function(e){
+  $('body').on('click', '.delete-bookmark', function(e){
+    
     console.log("Win");
-    console.log(jQuery(this).attr('url'));
-    deleteBookmark(jQuery(this).attr('url'));
+    deleteBookmark(jQuery(jQuery(this)[0]).attr('url'));
+    //console.log(jQuery(this).children('.deleteBookmark').attr('url'));
+    //deleteBookmark(jQuery(this).attr('url'));
   });
   $('#tagsField').change(function(e){
     setTimeout(function(){
