@@ -120,6 +120,19 @@ function grabBookmarks(){
 			}
 		}
 		$('.bookmark-element').last().css('padding-bottom','40px');
+		$('.bookmark-element').droppable({
+    		drop: function(evt, ui){
+    		if($(this).find(".bookmark-tags").children('.tag-'+ui.draggable.find(".tagit-label").text()).length==0){
+    			var url = $(this).find(".bookmark-url").attr('href');
+    			console.log(url);
+    			addTag(url, ui.draggable.find(".tagit-label").text())
+    			$(this)
+    			.addClass( "ui-state-highlight" )
+    			.find(".bookmark-tags")
+    			.prepend('<li class="tag-'+ui.draggable.find(".tagit-label").text()+'">'+ui.draggable.find(".tagit-label").text()+'</li>');
+    		}
+    	}
+	});	
 	});
 }
 function addTag(url, tag){
@@ -133,19 +146,3 @@ function addTag(url, tag){
 }
 
 // Bind event handlers to tags and bookmark-elements
-$(function()
-{    
-    $('.bookmark-element').droppable({
-    	drop: function(evt, ui){
-    		if($(this).find(".bookmark-tags").children('.tag-'+ui.draggable.find(".tagit-label").text()).length==0){
-    			var url = $(this).find(".bookmark-url").attr('href');
-    			console.log(url);
-    			addTag(url, ui.draggable.find(".tagit-label").text())
-    			$(this)
-    			.addClass( "ui-state-highlight" )
-    			.find(".bookmark-tags")
-    			.prepend('<li class="tag-'+ui.draggable.find(".tagit-label").text()+'">'+ui.draggable.find(".tagit-label").text()+'</li>');
-    		}
-    	}
-	});
-});
