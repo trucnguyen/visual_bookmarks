@@ -6,15 +6,26 @@ getGlobalStorage("bookmarks", function(bookmarks){
   console.log(bookmarks);
 });
 getGlobalStorage("tags", function(tags){
+  $('#tagsField').tagit({
+    singleField: true,
+    singleFieldNode: $('#tagsField')
+  });
+ $('#tagsField').tagit({
+    beforeTagAdded: function(evt, ui) {
+    if(!ui.duringInitialization) {
+        ui.tag.draggable({
+        zIndex: 1000,
+        ghosting: true,
+        revert: true,
+        opacity: 0.7
+        });
+      }
+    }
+  }); 
   if(tags == undefined || tags == null) {
     saveGlobalStorage('tags', []);
   }
   else{
-    $('#tagsField').tagit({
-        // This will make Tag-it submit a single form value, as a comma-delimited field.
-        singleField: true,
-        singleFieldNode: $('#tagsField')
-    });
     for(var t in tags){
       $('#tagsField').tagit('createTag',tags[t]);
     }
