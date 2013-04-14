@@ -100,6 +100,13 @@ function bookmarkView(){
 	$('#bookmark-view').append('<ul id="bookmark-list"></ul>');
 }
 
+function grabTags(url, tags){
+	console.log(url, tags);
+	for(var t in tags){
+		$('.bookmark-url[href="'+url+'"] .bookmark-tags').append('<li class="tag-'+tags[t]+'">'+tags[t]+'</li>')
+	}
+}
+
 function grabBookmarks(){
 	getGlobalStorage("bookmarks", function(bookmarks){
 		$('#bookmark-list').empty();
@@ -108,36 +115,37 @@ function grabBookmarks(){
 			$('#bookmark-list').prepend('<li class="bookmark-element"><a href="'+bookmarks[key]['url']+'"><div class="visual-bookmark"><iframe class="bookmark-video" width="300" height="170" src="'+bookmarks[key]['video']+'" frameborder="0" allowfullscreen></iframe></div></a><div class="bookmark-title">'+bookmarks[key]['title']+'</div><a class="delete-bookmark" url="'+bookmarks[key]['url']+'">delete</a></li>');
 			}
 			else{
-				$('#bookmark-list').prepend('<li class="bookmark-element"><a href="'+bookmarks[key]['url']+'"><div class="visual-bookmark"><img class="bookmark-image" src="'+bookmarks[key]['image']+'#ignore"/></div></a><div class="bookmark-title">'+bookmarks[key]['title']+'</div><a class="delete-bookmark" url="'+bookmarks[key]['url']+'">delete</a></li>');
+				$('#bookmark-list').prepend('<li class="bookmark-element"><a class="bookmark-url" href="'+bookmarks[key]['url']+'"><div class="visual-bookmark"><ul class="bookmark-tags"></ul><img class="bookmark-image" src="'+bookmarks[key]['image']+'#ignore"/></div></a><div class="bookmark-title">'+bookmarks[key]['title']+'</div><a class="delete-bookmark" url="'+bookmarks[key]['url']+'">delete</a></li>');
+				grabTags(bookmarks[key]['url'], bookmarks[key]['tags']);
 			}
 		}
 		$('.bookmark-element').last().css('padding-bottom','40px');
 	});
 }
-
+function addTag(url, tag){
+	getGlobalStorage("bookmarks", function(bookmarks){
+		if(jQuery.inArray(tag, bookmarks[url]['tags'])==-1){
+			bookmarks[url]['tags'].push(tag);
+			saveGlobalStorage("bookmarks", bookmarks);
+		}
+		//bookmarks[url]['']
+	});
+}
 
 // Bind event handlers to tags and bookmark-elements
 $(function()
-{
-    $('#tagsField').tagit({
-	    beforeTagAdded: function(evt, ui) {
-	        if (!ui.duringInitialization) {
-	        	ui.tag.draggable({
-					zIndex: 1000,
-					ghosting: true,
-					revert:	true,
-					opacity: 0.7
-				});
-	        }
-	    }
-    });
-    
+{    
     $('.bookmark-element').droppable({
     	drop: function(evt, ui){
-    		$(this)
+    		if($(this).find(".bookmark-tags").children('.tag-'+ui.draggable.find(".tagit-label").text()).length==0){
+    			var url = $(this).find(".bookmark-url").attr('href');
+    			console.log(url);
+    			addTag(url, ui.draggable.find(".tagit-label").text())
+    			$(this)
     			.addClass( "ui-state-highlight" )
-    			.find(".bookmark-title")
-    			.prepend("TAG " + ui.draggable.find(".tagit-label").text());
+    			.find(".bookmark-tags")
+    			.prepend('<li class="tag-'+ui.draggable.find(".tagit-label").text()+'">'+ui.draggable.find(".tagit-label").text()+'</li>');
+    		}
     	}
 	});
 });

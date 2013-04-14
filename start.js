@@ -31,7 +31,6 @@ getGlobalStorage("tags", function(tags){
     }
   }
 });
-console.log("Begin stuff");
 bookmarkView();
 grabBookmarks();
 $(document).ready(function(){
@@ -58,8 +57,13 @@ $(document).ready(function(){
       for(var t=0; t<jQuery('#tagsField .tagit-choice .tagit-label').length; t++){
         tags.push(jQuery(jQuery('#tagsField .tagit-choice .tagit-label')[t]).html());  
       }
-      console.log(tags);
       saveGlobalStorage('tags', tags);
     }, 300); 
+  });
+  $('.bookmark-element').change(function(e){
+    console.log("This is a mic test");
+  });
+  $('body').on('change', '.bookmark-tags', function(e){
+    console.log($(this).parent().parent().attr('href'));
   });
 });
