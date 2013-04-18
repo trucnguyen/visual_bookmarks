@@ -1,4 +1,9 @@
 #bookmark-view{
+	font-family: "HelveticaNeueThin", "HelveticaNeue-Thin", "Arial", sans-serif  !important; 
+	font-size: 13px !important;
+	font-weight: 200 !important;
+	font-stretch: normal !important;
+	text-align: left !important;
 	position: fixed;
 	top: 0px;
 	right: 0px;
@@ -19,68 +24,71 @@
 	list-style-type: none;
 	width: 300px;
 	border-left: 1px solid #888;
-
 }
 #bookmark-list li{
-	font-family: "HelveticaNeueThin", "HelveticaNeue-Thin", "Arial", sans-serif; 
-	font-size: 16px;
-	font-weight:200;
-	font-stretch:normal;
 	height: 208px;
 	width: 100%;
 	border-bottom: 1px solid #888;
 	border-top: 1px solid #888;
 	text-overflow: ellipsis;	
 }
-#add-bookmark{
-	float: left;
-}
-#expand-bookmarks{
-	float: left;
-	width: 48px;
-	height: 48px;
-	text-align: center;
-	background-color: #e3e3e8;
-}
-#clear-bookmarks{
-	display: none;
-}
 #bookmark-options{
 	width: 100%;
-	height: 100px;
+	height: 40px;
 	background-color: #e3e3e8;
-
 }
-#tags-row{
-	height: 48px;
+#bookmark-options .opt-btn {
+	position: relative;
+	top: 10px;
+    padding: 10px 15px;
+    background: #4479BA;
+    color: #FFF;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: solid 1px #20538D;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+#bookmark-options .opt-btn:hover {
+	text-decoration: none;
+}
+#clear-bookmarks, #reset-tags {
+	display: none;
+}
+#tags-row {
 	display: inline-block;
+	height: 48px;
 }
 #tags-row ul {
 	overflow: visible;
+	margin-top: 0;
 }
-.visual-bookmark{
-	height: 170px;
+.bookmark-title{
+	display: inline;
+	font-size: 12px !important;
+	overflow: none;
+	float: left;
+	width: 250px;
+	height: 36px;
 	background-color: #ccc;
 }
 .delete-bookmark{
-	text-align: center;
+	text-align: center !important;;
 	cursor: pointer;
 	float: right;
+	height: 36px;
+	background-color: #ccc;
 }
 .bookmark-image{
 	max-height: 170px;
 	max-width: 300px;
 }
-.bookmark-title{
-	display: inline;
-	font-size: 12pt;
-	overflow: none;
-	float: left;
-	width: 250px;
-	height: 60px;
-}
-.bookmark-tags{
+.bookmark-tags {
 	display: none;
+/* 	display:inline; padding:0 10px; */
 }
 .tagit-choice.ui-widget-content.ui-state-default.ui-corner-all.tagit-choice-editable.ui-draggable.selected-tag{
 	background-color: #C5B358 !important;

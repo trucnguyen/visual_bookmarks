@@ -93,11 +93,11 @@ function deleteBookmark(url){
 
 function bookmarkView(){
 	$('body').append('<div id="bookmark-view"><div id="bookmark-options"></div></div>');
-	$('#bookmark-options').append('<div id="expand-bookmarks"> << </div>');
-	$('#bookmark-options').append('<img id="add-bookmark" src="'+chrome.extension.getURL("images/plus.png")+'"/><br/>');
-	$('#bookmark-options').append('<a id="clear-bookmarks">Clear All</a>');
-	$('#bookmark-options').append('<a id="reset-tags">View All</a>')
-	$('#bookmark-view').append('<div id="tags-row"><form><ul id="tagsField" /></div>');
+	$('#bookmark-options').append('<a id="expand-bookmarks" class="opt-btn"> << </a>');
+	$('#bookmark-options').append('<a id="add-bookmark" class="opt-btn"> + </a>');
+	$('#bookmark-options').append('<a id="clear-bookmarks" class="opt-btn"> Clear All </a>');
+	$('#bookmark-options').append('<a id="reset-tags" class="opt-btn"> View All </a>')
+	$('#bookmark-view').append('<div id="tags-row"><ul id="tagsField" /></div>');
 	$('#bookmark-view').append('<ul id="bookmark-list"></ul>');
 }
 
@@ -113,14 +113,14 @@ function grabBookmarks(){
 		$('#bookmark-list').empty();
 		for(var key in bookmarks){
 			if(bookmarks[key]['pageType']=="video"){
-			$('#bookmark-list').prepend('<li class="bookmark-element"><a class="bookmark-url" href="'+bookmarks[key]['url']+'"><div class="visual-bookmark"><ul class="bookmark-tags"></ul><iframe class="bookmark-video" width="300" height="170" src="'+bookmarks[key]['video']+'" frameborder="0" allowfullscreen></iframe></div></a><div class="bookmark-title">'+bookmarks[key]['title']+'</div><a class="delete-bookmark" url="'+bookmarks[key]['url']+'">delete</a></li>');
+			$('#bookmark-list').prepend('<li class="bookmark-element"><div class="bookmark-title">'+bookmarks[key]['title']+'</div><a class="delete-bookmark" url="'+bookmarks[key]['url']+'">delete</a><a class="bookmark-url" href="'+bookmarks[key]['url']+'"><ul class="bookmark-tags"></ul><iframe class="bookmark-video" width="300" height="170" src="'+bookmarks[key]['video']+'" frameborder="0" allowfullscreen></iframe></a></li>');
 			}
 			else{
-				$('#bookmark-list').prepend('<li class="bookmark-element"><a class="bookmark-url" href="'+bookmarks[key]['url']+'"><div class="visual-bookmark"><ul class="bookmark-tags"></ul><img class="bookmark-image" src="'+bookmarks[key]['image']+'#ignore"/></div></a><div class="bookmark-title">'+bookmarks[key]['title']+'</div><a class="delete-bookmark" url="'+bookmarks[key]['url']+'">delete</a></li>');
+				$('#bookmark-list').prepend('<li class="bookmark-element"><div class="bookmark-title">'+bookmarks[key]['title']+'</div><a class="delete-bookmark" url="'+bookmarks[key]['url']+'">delete</a><a class="bookmark-url" href="'+bookmarks[key]['url']+'"><ul class="bookmark-tags"></ul><img class="bookmark-image" src="'+bookmarks[key]['image']+'#ignore"/></a></li>');
 			}
 			grabTags(bookmarks[key]['url'], bookmarks[key]['tags']);
 		}
-		$('.bookmark-element').last().css('padding-bottom','40px');
+/* 		$('.bookmark-element').last().css('padding-bottom','40px'); */
 		$('.bookmark-element').droppable({
     		drop: function(evt, ui){
     		if($(this).find(".bookmark-tags").children('.tag-'+ui.draggable.find(".tagit-label").text()).length==0){

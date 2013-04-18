@@ -41,12 +41,17 @@ $(document).ready(function(){
   $('#expand-bookmarks').click(function(){
     $('#bookmark-list').toggle();
     $('#clear-bookmarks').toggle();
+    $('#reset-tags').toggle();
     console.log($('#bookmark-view').css('height'));
     if($('#bookmark-view').hasClass("expanded-view")){
-      $('#bookmark-view').removeClass("expanded-view");
+		$('#bookmark-view').removeClass("expanded-view");
+		$('#expand-bookmarks').html(" << ");
+		$('#tags-row').css('display', 'none');
     }
     else{
-      $('#bookmark-view').addClass("expanded-view");
+		$('#bookmark-view').addClass("expanded-view");
+		$('#expand-bookmarks').html(" >> ");
+		$('#tags-row').css('display', 'inline-block');
     }
   });
   $('#add-bookmark').click(function(){
