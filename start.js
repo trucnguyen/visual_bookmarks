@@ -37,6 +37,8 @@ getGlobalStorage("tags", function(tags){
 });
 bookmarkView();
 grabBookmarks();
+$('#tags-row').toggle();
+
 $(document).ready(function(){
   $('#expand-bookmarks').click(function(){
     $('#bookmark-list').toggle();
@@ -46,12 +48,12 @@ $(document).ready(function(){
     if($('#bookmark-view').hasClass("expanded-view")){
 		$('#bookmark-view').removeClass("expanded-view");
 		$('#expand-bookmarks').html(" << ");
-		$('#tags-row').css('display', 'none');
+		$('#tags-row').toggle();
     }
     else{
 		$('#bookmark-view').addClass("expanded-view");
 		$('#expand-bookmarks').html(" >> ");
-		$('#tags-row').css('display', 'inline-block');
+		$('#tags-row').toggle();
     }
   });
   $('#add-bookmark').click(function(){
