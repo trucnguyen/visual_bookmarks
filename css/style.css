@@ -94,3 +94,6 @@
 	background-color: #C5B358 !important;
 	background-image: none;
 }
+.bookmark-element:last-child{
+	margin-bottom: 40px;
+}

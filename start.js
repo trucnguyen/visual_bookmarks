@@ -83,7 +83,9 @@ $(document).ready(function(){
     $('.selected-tag').removeClass('selected-tag');
     $(this).addClass('selected-tag')
     var selector = '.tag-'+$(this).children('.tagit-label').html();
-    $(selector).parent().parent().parent().parent().show();
+    console.log(selector);
+    console.log($(selector).closest(".bookmark-element"));
+    $(selector).closest(".bookmark-element").show();
   });
   $('#reset-tags').click(function(e){
     $('.bookmark-element').show();
