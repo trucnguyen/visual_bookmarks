@@ -113,10 +113,10 @@ function grabBookmarks(){
 		$('#bookmark-list').empty();
 		for(var key in bookmarks){
 			if(bookmarks[key]['pageType']=="video"){
-			$('#bookmark-list').prepend('<li class="bookmark-element"><div class="bookmark-title">'+bookmarks[key]['title']+'</div><a class="delete-bookmark" url="'+bookmarks[key]['url']+'">delete</a><a class="bookmark-url" href="'+bookmarks[key]['url']+'"><ul class="bookmark-tags"></ul><iframe class="bookmark-video" width="300" height="170" src="'+bookmarks[key]['video']+'" frameborder="0" allowfullscreen></iframe></a></li>');
+			$('#bookmark-list').prepend('<li class="bookmark-element"><div class="bookmark-title"><a href="'+bookmarks[key]['url']+'">'+bookmarks[key]['title']+'</a></div><a class="delete-bookmark" url="'+bookmarks[key]['url']+'">delete</a><a class="bookmark-url" href="'+bookmarks[key]['url']+'"><ul class="bookmark-tags"></ul><iframe class="bookmark-video" width="300" height="170" src="'+bookmarks[key]['video']+'" frameborder="0" allowfullscreen></iframe></a></li>');
 			}
 			else{
-				$('#bookmark-list').prepend('<li class="bookmark-element"><div class="bookmark-title">'+bookmarks[key]['title']+'</div><a class="delete-bookmark" url="'+bookmarks[key]['url']+'">delete</a><a class="bookmark-url" href="'+bookmarks[key]['url']+'"><ul class="bookmark-tags"></ul><img class="bookmark-image" src="'+bookmarks[key]['image']+'#ignore"/></a></li>');
+				$('#bookmark-list').prepend('<li class="bookmark-element"><div class="bookmark-title"><a href="'+bookmarks[key]['url']+'">'+bookmarks[key]['title']+'</a></div><a class="delete-bookmark" url="'+bookmarks[key]['url']+'">delete</a><a class="bookmark-url" href="'+bookmarks[key]['url']+'"><ul class="bookmark-tags"></ul><img class="bookmark-image" src="'+bookmarks[key]['image']+'#ignore"/></a></li>');
 			}
 			grabTags(bookmarks[key]['url'], bookmarks[key]['tags']);
 		}

@@ -23,7 +23,7 @@ getGlobalStorage("tags", function(tags){
     }
   }); 
   if(tags == undefined || tags == null) {
-    var defaultTags = ["gif", "image", "video", "html"];
+    var defaultTags = ["gif", "image", "video", "html", "news", "shopping", "school"];
     saveGlobalStorage('tags', defaultTags);
     for(var t in defaultTags){
       $('#tagsField').tagit('createTag', defaultTags[t]);
